@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .warp {
+        position: relative;
+        width: 1000px;
+        margin: 20px auto;
+      }
+
+      .box {
+        height: 250px;
+        text-align: center;
+        font-size: 32px;
+        line-height: 250px;
+        color: white;
+      }
+
+      #box1 {
+        background: cadetblue;
+      }
+      #box2 {
+        background: purple;
+        display: none;
+      }
+      #box3 {
+        background: orangered;
+        display: none;
+      }
+
+      .warp button {
+        border: 0 none;
+        background: rgba(0, 0, 0, 0.6);
+        font-size: 24px;
+        border-radius: 32px;
+        padding: 6px 15px;
+        position: absolute;
+        top: 42%;
+      }
+
+      #prev {
+        left: 20px;
+      }
+
+      #next {
+        right: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="warp">
+      <button id="prev">&laquo;</button>
+      <button id="next">&raquo;</button>
+      <div class="box" id="box1">Item One</div>
+      <div class="box" id="box2">Item Two</div>
+      <div class="box" id="box3">Item Three</div>
+    </div>
+    <script>
+      document.querySelector("#next").onclick = next;
+      document.querySelector("#prev").onclick = prev;
+      var pos = 1;
+
+      function next() {
+        document.querySelector("#box" + pos).style.display = "none";
+        pos++;
+        if (pos > 3) pos = 1;
+        document.querySelector("#box" + pos).style.display = "block";
+      }
+
+      function prev() {
+        document.querySelector("#box" + pos).style.display = "none";
+        pos--;
+        if (pos < 1) pos = 3;
+        document.querySelector("#box" + pos).style.display = "block";
+      }
+    </script>
+  </body>
+</html>

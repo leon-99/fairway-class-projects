@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+     let users = [
+     {name: 'Alice', age: 22, gender: 'female'},
+     {name: 'Bob', age: 18, gender: 'male'},
+     {name: 'Tom', age: 29, gender: 'male'},
+     {name: 'Mary', age: 23, gender: 'female'}
+     ]
+
+   console.log(users.map(u => u.name));
+   users.forEach(u => console.log(u.name));
+     console.log(users.filter(u => u.age > 20));
+
+     console.log(
+        users
+            .filter(u => u.gender === 'female')
+            .map(u => u.name)
+     );
+    </script>
+  </body>
+</html>

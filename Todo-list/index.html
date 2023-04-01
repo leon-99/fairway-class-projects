@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODO List</title>
+  </head>
+  <link rel="stylesheet" href="all.min.css" />
+  <link rel="stylesheet" href="bootstrap.min.css" />
+  <style>
+    body {
+      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+      text-align: center;
+    }
+    ul {
+      list-style-type: none;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    a {
+      margin-left: 20px;
+    }
+
+    #done {
+      color: gray;
+      font-size: 14px;
+    }
+
+    .del {
+      color: red;
+    }
+  </style>
+  <body>
+    <nav class="navbar navbar-dark bg-danger">
+      <div class="container" style="max-width: 600px">
+        <a href="" class="navbar-brand">
+          <i class="fas fa-list me-3"></i> Todo App
+          <span class="badge bg-primary">0</span>
+        </a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="#" class="nav-link text-light" id="clear">Clear</a>
+            </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container" style="max-width: 600px;">
+        <div class="input-group my-4">
+            <input type="text" class="form-control">
+            <button class="btn btn-danger">
+                <i class="fas fa-add"></i>
+            </button>
+        </div>
+        <ul id="todo" class="list-group mb-4"></ul>
+        <ul id="done" class="list-group" style="color: gray; font-size: 14px;"></ul>
+    </div>
+
+    
+
+    <script>
+
+        document.querySelector("#clear").onclick = function() {
+            document.querySelector("#done").innerHTML = "";
+        }
+
+        function updateCount() {
+            document.querySelector(".badge").textContent = document.querySelectorAll("#todo li").length;
+        }
+
+
+      document.querySelector("button").onclick = function () {
+        let text = document.querySelector("input").value;
+        if (text == "") return false;
+        createItem(text);
+        document.querySelector("input").value = "";
+        document.querySelector("input").focus();
+      };
+
+      document.querySelector("input").onkeydown = function (e) {
+        if (e.key == "Enter") {
+          document.querySelector("button").onclick();
+        }
+      };
+
+      function createItem(text) {
+        let li = document.createElement("li");
+        li.textContent = text;
+        li.classList.add("list-group-item");
+
+        let check = document.createElement("a");
+        check.setAttribute("href", "#");
+        check.classList.add("fas", "fa-check", "float-start", "me-3");
+        check.onclick = function () {
+          document.querySelector("#done").appendChild(check.parentElement);
+          check.remove();
+          updateCount();
+        };
+        li.appendChild(check);
+
+        let del = document.createElement("a");
+        del.setAttribute("href", "#");
+        del.setAttribute("class", "del");
+        del.classList.add("fas", "fa-trash", "float-end");
+        del.onclick = function () {
+          del.parentElement.remove();
+          updateCount();
+        };
+        li.appendChild(del);
+        document.querySelector("#todo").appendChild(li);
+        updateCount();
+      }
+    </script>
+    <script src="bootstrap.bundle.min.js"></script>
+  </body>
+</html>
