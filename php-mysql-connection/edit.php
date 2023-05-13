@@ -12,8 +12,10 @@
         include("mysql.php");
         $db = connect();
         $id = $_GET['id'];
-        $result = $db->query("SELECT * FROM roles WHERE id = $id");
-        $row = $result->fetch();
+        $sql = "SELECT * FROM roles WHERE id = :id";
+        $statement = $db->prepare($sql);
+        $statement->execute([":id" => $id]);
+        $row = $statement->fetch();
 
     ?>
     <form action="update.php" method="post">

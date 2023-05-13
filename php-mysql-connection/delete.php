@@ -6,6 +6,9 @@ $db = connect();
 
 $id = $_GET['id'];
 
-$db->query("DELETE FROM roles WHERE id = $id");
+$sql = "DELETE FROM roles WHERE id = :id";
+
+$statement = $db->prepare($sql);
+$statement->execute(["id" => $id]);
 
 header("location: ./index.php");
