@@ -2,18 +2,17 @@
 
 require("vendor/autoload.php");
 
-use Helpers\Auth;
-use Helpers\HTTP;
 use Libs\Database\MySQL;
 use Libs\Database\UsersTable;
 
-print_r($_FILES);
+$table = new UsersTable(new MySQL);
+$id = $table->insert([
+    "name" => "Alice",
+    "email" => "alice@gmail.com",
+    "phone" => "7387893099",
+    "address" => "1 st",
+    "password" => "password"
+]);
 
-Auth::check();
-HTTP::redirect();
+echo $id;
 
-$db = new MySQL;
-$db->connect();
-
-$table = new UsersTable;
-$table->insert();
