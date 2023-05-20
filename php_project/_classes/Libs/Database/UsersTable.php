@@ -8,11 +8,30 @@ class UsersTable
 {
 
     private $db;
-    public function __construct(MySQL $mysql) 
+
+    public function __construct(MySQL $mysql)
     {
         // require to pass in mysql object.
         $this->db = $mysql->connect();
     }
+
+    public function findByEmailAndPassword($email, $password)
+    {
+        try {
+            $statement = $this->db->prepare("SELECT * FROM users WHERE email = :email AND password = :password");
+            $statement->execute(["email" => $email, "password" => $password]);
+            $user = $statement->fetch();
+
+            if ($user)
+                return $user;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+
+        return false;
+    }
+
     public function insert($data)
     {
         try {
@@ -30,4 +49,17 @@ class UsersTable
             echo $e->getMessage();
         }
     }
+
+    public function updatePhoto($id, $photo)
+    {
+        try {
+            $statement = $this->db->prepare("UPDATE users SET photo = :photo WHERE id = :id");
+            $statement->execute(["photo" => $photo, "id" => $id]);
+            return $statement->rowCount();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+    }
+
 }

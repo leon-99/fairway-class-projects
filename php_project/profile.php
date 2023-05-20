@@ -1,9 +1,8 @@
 <?php
-session_start();
-if (!isset($_SESSION['user'])) {
-    header('location: index.php');
-    exit();
-}
+include("vendor/autoload.php");
+use Helpers\Auth;
+
+$user = Auth::check();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,8 +23,8 @@ if (!isset($_SESSION['user'])) {
                 Cannot upload file
             </div>
         <?php endif ?>
-        <?php if (file_exists('_actions/photos/profile.jpg')): ?>
-            <img class="img-thumbnail mb-3" src="_actions/photos/profile.jpg" alt="Profile Photo" width="200">
+        <?php if ($user->photo): ?>
+            <img class="img-thumbnail mb-3" src="_actions/photos/<?= $user->photo ?>" alt="Profile Photo" width="200">
         <?php endif ?>
         <form action="_actions/upload.php" method="post" enctype="multipart/form-data">
             <div class="input-group mb-3">
@@ -34,14 +33,17 @@ if (!isset($_SESSION['user'])) {
             </div>
         </form>
         <ul class="list-group">
-            <li class="list-group-item">
-                <b>Email:</b> john.doe@gmail.com
+        <li class="list-group-item">
+                <b>Name:</b> <?= $user->name ?>
             </li>
             <li class="list-group-item">
-                <b>Phone:</b> (09) 243 867 645
+                <b>Email:</b> <?= $user->email ?>
             </li>
             <li class="list-group-item">
-                <b>Address:</b> No. 321, Main Street, West City
+                <b>Phone:</b> <?= $user->phone ?>
+            </li>
+            <li class="list-group-item">
+                <b>Address:</b> <?= $user->address ?>
             </li>
         </ul>
         <br>

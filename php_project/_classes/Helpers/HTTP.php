@@ -13,4 +13,9 @@ class HTTP
         header("location: $go");
         exit();
     }
+
+    static function session_start()
+    {
+        session_start();
+    }
 }
