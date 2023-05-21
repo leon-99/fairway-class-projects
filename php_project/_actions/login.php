@@ -18,5 +18,5 @@ if ($user) {
     $_SESSION["user"] = $user;
     HTTP::redirect("/profile.php");
 } else {
-    HTTP::redirect("/login.php", "incorrect=login");
+    HTTP::redirect("/index.php", "incorrect=login");
 }

@@ -9,6 +9,16 @@ class UsersTable
 
     private $db;
 
+    public function getAll()
+    {
+        $statement = $this->db->query("SELECT users.*, roles.name AS role
+        FROM users LEFT JOIN roles
+        ON users.role_id = roles.id
+        ");
+
+        return $statement->fetchAll();
+    }
+
     public function __construct(MySQL $mysql)
     {
         // require to pass in mysql object.
@@ -60,6 +70,14 @@ class UsersTable
             echo $e->getMessage();
             exit();
         }
+    }
+
+    public function detele($id)
+    {
+        $statement = $this->db->prepare("DELETE FROM users WHERE id = :id");
+        $statement->execute(["id" => $id]);
+        
+        return $statement->rowCount();
     }
 
 }

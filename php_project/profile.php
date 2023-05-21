@@ -17,7 +17,7 @@ $user = Auth::check();
 
 <body>
     <div class="container mt-5">
-        <h1 class="mb-3">John Doe (Manager)</h1>
+        <h3 class="mb-3 text-center">Profile</h3>
         <?php if (isset($_GET['error'])): ?>
             <div class="alert alert-warning">
                 Cannot upload file
@@ -47,7 +47,8 @@ $user = Auth::check();
             </li>
         </ul>
         <br>
-        <a href="_actions/logout.php">Logout</a>
+        <a href="admin.php">Manage Users</a>
+        <a href="_actions/logout.php" class="text-danger">Logout</a>
     </div>
 </body>
 
