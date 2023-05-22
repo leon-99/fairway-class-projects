@@ -9,6 +9,8 @@ class HTTP
     static function redirect($path, $q="") 
     {
         $go = static::$url . $path;
+
+
         if ($q) $go .= "?$q";
         header("location: $go");
         exit();

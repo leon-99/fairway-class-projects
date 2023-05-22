@@ -4,13 +4,13 @@
 <head>
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
-        .wrap {
-            width: 100%;
-            max-width: 400px;
-            margin: 40px auto;
-        }
+    .wrap {
+        width: 100%;
+        max-width: 400px;
+        margin: 40px auto;
+    }
     </style>
 </head>
 
@@ -18,15 +18,15 @@
     <div class="wrap">
         <h1 class="h3 mb-3">Login</h1>
         <?php if (isset($_GET['success'])): ?>
-            <div class="alert alert-warning">
-                Register successful
-            </div>
+        <div class="alert alert-warning">
+            Register successful
+        </div>
         <?php endif ?>
 
         <?php if (isset($_GET['incorrect'])): ?>
-            <div class="alert alert-warning">
-                Incorrect Email or Password
-            </div>
+        <div class="alert alert-warning">
+            Incorrect Email or Password
+        </div>
         <?php endif ?>
 
         <form action="_actions/login.php" method="post">

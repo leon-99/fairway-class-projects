@@ -11,20 +11,19 @@ $user = Auth::check();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 
 <body>
     <div class="container mt-5">
         <h3 class="mb-3 text-center">Profile</h3>
         <?php if (isset($_GET['error'])): ?>
-            <div class="alert alert-warning">
-                Cannot upload file
-            </div>
+        <div class="alert alert-warning">
+            Cannot upload file
+        </div>
         <?php endif ?>
         <?php if ($user->photo): ?>
-            <img class="img-thumbnail mb-3" src="_actions/photos/<?= $user->photo ?>" alt="Profile Photo" width="200">
+        <img class="img-thumbnail mb-3" src="_actions/photos/<?= $user->photo ?>" alt="Profile Photo" width="200">
         <?php endif ?>
         <form action="_actions/upload.php" method="post" enctype="multipart/form-data">
             <div class="input-group mb-3">
@@ -33,7 +32,7 @@ $user = Auth::check();
             </div>
         </form>
         <ul class="list-group">
-        <li class="list-group-item">
+            <li class="list-group-item">
                 <b>Name:</b> <?= $user->name ?>
             </li>
             <li class="list-group-item">

@@ -8,6 +8,7 @@ use Helpers\HTTP;
 
 $user = Auth::check();
 
+
 $name = $_FILES['photo']['name'];
 $tmp = $_FILES['photo']['tmp_name'];
 $type = $_FILES['photo']['type'];
