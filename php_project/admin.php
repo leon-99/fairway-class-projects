@@ -25,7 +25,7 @@ $users = $table->getAll();
 </head>
 
 <body>
-    <div class="navbar bg-primary navbar-bark navbar-expand">
+    <div class="navbar bg-dark navbar-dark navbar-expand">
         <div class="container">
             <a href="admin.php" class="navbar-brand">Manage Users</a>
             <ul class="navbar-nav">
@@ -43,7 +43,7 @@ $users = $table->getAll();
 
 
     <div class="container">
-        <table class="table table-striped mt-5">
+        <table class="table table-striped mt-5 table-dark">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">id</th>
@@ -51,6 +51,7 @@ $users = $table->getAll();
                     <th scope="col">Email</th>
                     <th scope="col">Phone</th>
                     <th scope="col">Role</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -72,13 +73,13 @@ $users = $table->getAll();
                         <?php endif ?>
                     </td>
                     <td>
+                        <!-- change role -->
                         <div class="btn-group dropdown">
-
+                            <?php if ($auth->role_id == 3): ?>
                             <a href="#" class="btn btn-sm btn-outline-primary dropdown-toggle"
                                 data-bs-toggle="dropdown">
                                 Change Role
                             </a>
-
                             <div class="dropdown-menu">
                                 <a href="_actions/role.php?id=<?= $user->id ?>&role=1" class="dropdown-item">
                                     User
@@ -90,13 +91,29 @@ $users = $table->getAll();
                                     Admin
                                 </a>
                             </div>
-                            <a href="_actions/suspend.php?id=<?= $user->id ?>" class="btn btn-sm btn-outline-warning">
-                                Ban
-                            </a>
-                            <a href="_actions/delete.php?id=<?= $user->id ?>" class="btn btn-sm btn-outline-danger">
-                                Delete
-                            </a>
+                            <?php endif ?>
                         </div>
+
+                        <!-- suspend  -->
+                        <?php if ($auth->role_id >= 2): ?>
+                        <?php if ($user->suspended == 1): ?>
+                        <a href="_actions/unsuspend.php?id=<?= $user->id ?>" class="btn btn-sm btn-warning">
+                            Ban
+                        </a>
+                        <?php else: ?>
+                        <a href="_actions/suspend.php?id=<?= $user->id ?>" class="btn btn-sm btn-outline-warning">
+                            Ban
+                        </a>
+                        <?php endif ?>
+                        <?php endif ?>
+
+
+                        <!-- delete -->
+                        <?php if ($auth->role_id == 3): ?>
+                        <a href="_actions/delete.php?id=<?= $user->id ?>" class="btn btn-sm btn-outline-danger">
+                            Delete
+                        </a>
+                        <?php endif ?>
                     </td>
 
                 </tr>

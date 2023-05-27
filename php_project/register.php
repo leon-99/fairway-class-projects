@@ -16,7 +16,7 @@
 
 <body class="text-center">
     <div class="wrap">
-        <h1 class="h3 mb-3">Login</h1>
+        <h1 class="h3 mb-3">Register</h1>
         <?php if (isset($_GET['incorrect'])): ?>
                     <div class="alert alert-warning">
                         Something went wrong
@@ -28,7 +28,7 @@
             <input type="text" name="phone" class="form-control mb-2" placeholder="Phone" required>
 
             <textarea type="text" name="address" class="form-control mb-2" placeholder="Address" required>
-                
+
             </textarea>
 
             <input type="password" name="password" class="form-control mb-2" placeholder="Password" required>

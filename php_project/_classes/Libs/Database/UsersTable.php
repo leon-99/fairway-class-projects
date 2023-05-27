@@ -19,9 +19,8 @@ class UsersTable
         return $statement->fetchAll();
     }
 
-    public function __construct(MySQL $mysql)
+    public function __construct(MySQL $mysql) // require to pass in mysql object.
     {
-        // require to pass in mysql object.
         $this->db = $mysql->connect();
     }
 
@@ -78,6 +77,24 @@ class UsersTable
         $statement->execute(["id" => $id]);
         
         return $statement->rowCount();
+    }
+
+    public function suspend($id)
+    {
+        $statement = $this->db->prepare("UPDATE users SET suspended=1 WHERE id = :id");
+        $statement->execute(["id" => $id]);
+    }
+
+    public function unsuspend($id)
+    {
+        $statement = $this->db->prepare("UPDATE users SET suspended=0 WHERE id = :id");
+        $statement->execute(["id" => $id]);
+    }
+
+    public function changeRole($id, $role)
+    {
+        $statement = $this->db->prepare("UPDATE users SET role_id = :role WHERE id = :id");
+        $statement->execute(["id" => $id, "role" => $role]);
     }
 
 }
